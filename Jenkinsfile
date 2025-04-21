@@ -8,19 +8,19 @@ pipeline {
         }
         stage('Build') {
             steps {
-                // powershell 'gradle clean build'
-                bat 'gradle build'
+                powershell 'gradle build'
+                // bat 'gradle build'
             }
         }
         stage('Test') {
             steps {
-                // powershell 'gradle test'
-                bat 'gradle test'
+                powershell 'gradle test'
+                // bat 'gradle test'
             }
         }
         stage('Deploy') {
             steps {
-                powershell 'java -jar build/libs/hello-world-javaV1.jar'
+                powershell 'java -jar build/libs/hello-world-java-1.0-SNAPSHOT.jar'
             }
         }
     }
