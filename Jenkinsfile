@@ -20,7 +20,17 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                powershell 'java -jar build/libs/hello-world-java-1.0-SNAPSHOT.jar'
+                script {
+                    powershell '''
+                        $jarPath = "build/libs/hello-world-java-1.0-SNAPSHOT.jar"
+                        if (Test-Path $jarPath) {
+                            java -jar $jarPath
+                        } else {
+                            Write-Error "JAR file not found at: $jarPath"
+                            exit 1
+                        }
+                    '''
+                }
             }
         }
     }
